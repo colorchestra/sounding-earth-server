@@ -11,4 +11,4 @@
 ## TODO
 - [x] mount Node-Red flows from host
 - [ ] mount Node-Red settings from host
-
+- [ ] fix all the weirdo file permissions

@@ -8,7 +8,8 @@ services:
   node-red:
     image: nodered/node-red:latest
     environment:
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Berlin
+      - FLOWS=flows/flows.json
     ports:
       - "1880:1880"
     networks:
@@ -16,8 +17,8 @@ services:
     volumes:
       - node-red-data:/data
       - type: bind
-        source: ./node-red/flows.json
-        target: /data/flows.json
+        source: ./node-red/flows
+        target: /data/flows
         read_only: false
 #      - type: bind
 #        source: ./node-red/settings.js
