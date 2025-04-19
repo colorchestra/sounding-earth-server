@@ -1,0 +1,43 @@
+################################################################################
+# Node-RED Stack or Compose
+################################################################################
+# docker stack deploy node-red --compose-file docker-compose-node-red.yml
+# docker-compose -f docker-compose-node-red.yml -p myNoderedProject up
+################################################################################
+services:
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Amsterdam
+    ports:
+      - "1880:1880"
+    networks:
+      - sounding-earth-net
+    volumes:
+      - node-red-data:/data
+      - type: bind
+        source: ./node-red/flows.json
+        target: /data/flows.json
+        read_only: false
+#      - type: bind
+#        source: ./node-red/settings.js
+#        target: /data/settings.js
+#        read_only: false
+
+  mqtt:
+    image: eclipse-mosquitto:latest
+    volumes:
+      - type: bind
+        source: ./mosquitto/config
+        target: /mosquitto/config
+        read_only: false
+    ports:
+      - "1883:1883"
+    networks:
+      - sounding-earth-net
+
+volumes:
+  node-red-data:
+
+networks:
+  sounding-earth-net:
