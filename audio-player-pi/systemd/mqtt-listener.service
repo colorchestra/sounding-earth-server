@@ -1,0 +1,13 @@
+[Unit]
+Description=Sounding Earth MQTT Listener for stream control
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/sounding-earth-server/audio/audio.py
+Restart=always
+User=pi
+WorkingDirectory=/home/pi/sounding-earth-server/audio
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,18 @@
+[Unit]
+Description=Stream recording India
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+#Environment=PLACE=Bhutan
+#Environment=CHANNEL_URL="http://h406.khm.de:8080/Bidisha-channel1"
+#WorkingDirectory=/media/pi/LaCie/All recordings/Bhutan/
+ExecStart=ffmpeg -i "http://h406.khm.de:8080/Bidisha-channel2" -f alsa default
+Restart=always
+User=pi
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
